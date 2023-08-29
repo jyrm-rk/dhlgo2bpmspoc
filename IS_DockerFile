@@ -1,0 +1,8 @@
+FROM registry-144fd7c1.nip.io/v2/wm1015bpm:v1
+
+LABEL "Image.maintainer"="Jay"
+LABEL "Image.Usage"="DHL-GO2-POC"
+ 
+COPY  --chown=1724:1724 ./IS/ ${SAG_HOME}/IntegrationServer/instances/${INSTANCE_NAME}/packages
+
+###########
