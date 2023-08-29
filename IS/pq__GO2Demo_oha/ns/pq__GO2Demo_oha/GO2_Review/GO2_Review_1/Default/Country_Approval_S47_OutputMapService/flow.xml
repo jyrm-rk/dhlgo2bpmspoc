@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<FLOW VERSION="3.0" CLEANUP="true">
+
+  <!-- nodes -->
+
+<MAP MODE="STANDALONE">
+
+  <!-- nodes -->
+
+<MAPCOPY NAME="Link" FROM="/TaskData;2;0/CountryApprovalOutcome;1;0" TO="/CountryApprovalOutcome;1;0">
+</MAPCOPY>
+
+<MAPCOPY FROM="/TaskCompletionInfo;4;0;pub.task:TaskCompletionInfo" TO="/Country Approval_S47OutputEnv;4;0;pub.task:TaskCompletionInfo">
+</MAPCOPY>
+</MAP>
+</FLOW>

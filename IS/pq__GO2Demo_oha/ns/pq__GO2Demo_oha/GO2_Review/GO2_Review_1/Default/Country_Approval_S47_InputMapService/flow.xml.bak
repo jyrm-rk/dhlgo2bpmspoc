@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<FLOW VERSION="3.0" CLEANUP="true">
+
+  <!-- nodes -->
+
+<INVOKE SERVICE="pq__GO2Demo_oha.GO2_Review.GO2_Review_1.Default:Country_Approval_S47_QueueTask">
+
+  <!-- nodes -->
+
+<MAP MODE="INPUT">
+
+  <!-- nodes -->
+
+<MAPCOPY NAME="Link" FROM="/ReviewRequest;4;0;GO2_Review.doc:ReviewRequest" TO="/TaskData;2;0/ReviewRequest;2;0">
+</MAPCOPY>
+
+<MAPCOPY FROM="/Country ApprovalInputEnv;4;0;pub.task:TaskQueueInfo" TO="/TaskQueueInfo;4;0;pub.task:TaskQueueInfo">
+</MAPCOPY>
+</MAP>
+</INVOKE>
+</FLOW>

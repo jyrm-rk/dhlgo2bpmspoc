@@ -1,0 +1,120 @@
+message GO2_Review_doc_ReviewRequest {
+optional  GO2_Review_doc_ReviewRequest_MainData MainData = 1;
+optional  GO2_Review_doc_ReviewRequest_Additional Additional = 2;
+optional  GO2_Review_doc_ReviewRequest_CountrySpecific CountrySpecific = 3;
+optional  GO2_Review_doc_ReviewRequest_ExceptionalComments ExceptionalComments = 4;
+optional  GO2_Review_doc_ReviewRequest_BackupEmail BackupEmail = 5;
+optional  pub_publish_envelope _env = 536870910;
+}
+message GO2_Review_doc_ReviewRequest_BackupEmail {
+optional  string Text1 = 1;
+optional  string Text2 = 2;
+optional  string Text3 = 3;
+optional  string Text4 = 4;
+}
+message GO2_Review_doc_ReviewRequest_Additional {
+optional  string Text1 = 1;
+optional  string Text2 = 2;
+optional  string Text3 = 3;
+optional  string Text4 = 4;
+}
+message GO2_Review_doc_ReviewRequest_MainData {
+optional  GO2_Review_doc_ReviewRequest_MainData_MasterRequestInfo MasterRequestInfo = 1;
+repeated  GO2_Review_doc_ReviewRequest_MainData_Accounts Accounts = 2;
+optional  GO2_Review_doc_ReviewRequest_MainData_Main Main = 3;
+}
+message GO2_Review_doc_ReviewRequest_MainData_MasterRequestInfo {
+optional  string Country = 1;
+optional  string RequestType = 2;
+optional  string RequestSubType = 3;
+optional  string RequestName = 4;
+optional  string AccountPurpose = 5;
+optional  string AccountType = 6;
+}
+message GO2_Review_doc_ReviewRequest_MainData_Accounts {
+optional  string Number = 1;
+optional  string Type = 2;
+optional  string Purpose = 3;
+}
+message GO2_Review_doc_ReviewRequest_MainData_Main {
+repeated  GO2_Review_doc_ReviewRequest_MainData_Main_LegalIdentifiers LegalIdentifiers = 1;
+repeated  GO2_Review_doc_ReviewRequest_MainData_Main_Indicators Indicators = 2;
+repeated  GO2_Review_doc_ReviewRequest_MainData_Main_Addresses Addresses = 3;
+}
+message GO2_Review_doc_ReviewRequest_MainData_Main_Addresses {
+optional  string AddressType = 1;
+optional  string AddressLine1 = 2;
+optional  string AddressLine2 = 3;
+optional  string Postcode = 4;
+optional  string City = 5;
+optional  string Country = 6;
+optional  string State = 7;
+optional  string Province = 8;
+}
+message GO2_Review_doc_ReviewRequest_MainData_Main_LegalIdentifiers {
+optional  string Type = 1;
+optional  string Value = 2;
+optional  string RegistrationCountry = 3;
+optional  string ExceptionExemptionType = 4;
+optional  string ExceptionExemptionPurpose = 5;
+optional  string RegisteredName = 6;
+}
+message GO2_Review_doc_ReviewRequest_MainData_Main_Indicators {
+optional  string IndicatorType = 1;
+optional  string Value = 2;
+}
+message GO2_Review_doc_ReviewRequest_ExceptionalComments {
+optional  string Text1 = 1;
+optional  string Text2 = 2;
+optional  string Text3 = 3;
+optional  string Text4 = 4;
+}
+message GO2_Review_doc_ReviewRequest_CountrySpecific {
+optional  string Text1 = 1;
+optional  string Text2 = 2;
+optional  string Text3 = 3;
+optional  string Text4 = 4;
+}
+message pub_publish_envelope {
+optional  string activation = 1;
+optional  int32 appLastSeqn = 2;
+optional  string appPassword = 3;
+optional  int32 appSeqn = 4;
+optional  string appUserName = 5;
+optional  int32 priority = 6;
+optional  string businessContext = 7;
+repeated  int32 controlLabel = 8;
+optional  string errorsTo = 9;
+optional  string errorRequestsTo = 10;
+optional  string locale = 11;
+optional  int32 maxResults = 12;
+optional  string replyTo = 13;
+optional  int32 runLevel = 14;
+optional  bytes signature = 15;
+optional  string signatureType = 16;
+optional  int32 startResult = 17;
+optional  int32 tag = 18;
+optional  string trackId = 19;
+optional  string transactionId = 20;
+optional  string transformState = 21;
+optional  int32 age = 22;
+optional  string connectionIntegrity = 23;
+optional  string destId = 24;
+optional  int64 enqueueTime = 25;
+optional  string logBroker = 26;
+optional  string logHost = 27;
+optional  string pubDistinguishedName = 28;
+optional  string pubId = 29;
+optional  bytes pubNetAddr = 30;
+optional  int64 pubSeqn = 31;
+repeated  int32 pubLabel = 32;
+optional  int64 recvTime = 33;
+repeated  pub_publish_envelope_route route = 34;
+optional  string uuid = 35;
+optional  string status = 36;
+}
+message pub_publish_envelope_route {
+optional  string broker = 1;
+optional  int64 recvTime = 2;
+optional  int64 enqueueTime = 3;
+}
