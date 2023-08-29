@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Values version="2.0">
+  <value name="node_type">webMethods/trigger</value>
+  <value name="node_subtype">unknown</value>
+  <value name="node_nsName">pq__GO2Demo_oha.GO2_Review.GO2_Review_1.Default:transitionTrigger</value>
+  <value name="node_pkg">pq__GO2Demo_oha</value>
+  <value name="is_public">false</value>
+  <value name="trigger_type">broker-trigger</value>
+  <record name="trigger" javaclass="com.wm.util.Values">
+    <value name="concurrent">true</value>
+    <value name="auditOption">0</value>
+    <record name="auditSettings" javaclass="com.wm.util.Values">
+      <value name="document_data">0</value>
+      <value name="startExecution">false</value>
+      <value name="stopExecution">false</value>
+      <value name="onError">true</value>
+    </record>
+    <record name="redeliveryOptions" javaclass="com.wm.util.Values">
+      <value name="max">-1</value>
+      <value name="delayInterval">10000</value>
+      <value name="onRedeliveryFailure">0</value>
+      <value name="resumeTaskSvcName">wm.prt.admin:monitorPRTDB</value>
+    </record>
+    <value name="maxConcurrentThreads">10</value>
+    <value name="inDoubtDetection">false</value>
+    <value name="resolveWithHistory">false</value>
+    <value name="resolutionHistoryTTL">7200000</value>
+    <value name="uniqueId">1A/tBcs0THhKwE/pgSAGSrEsw9A=</value>
+    <value name="executeUser">Administrator</value>
+    <array name="conditions" type="record" depth="1">
+      <record javaclass="com.wm.util.Values">
+        <value name="type">simple</value>
+        <record name="data" javaclass="com.wm.util.Values">
+          <record name="messageTypeFilterPair" javaclass="com.wm.util.Values">
+            <value name="messageType">wm.prt.dispatch:ProcessTransitionVol</value>
+            <null name="filter"/>
+            <value name="umFilter">( ProcessModelID = 'pq__GO2Demo/GO2Review_tqai' and ProcessModelVersion = '1' )  and  ( TargetStepID  in (  'S84', 'S79', 'S47', 'S67', 'S53', 'S91', 'S30', 'S86', 'S71', 'S61', 'S38', 'S74', 'S29', 'S35', 'S56', 'S77', 'S90', 'S28', 'S81', 'S65' )  ) </value>
+          </record>
+          <value name="serviceName">wm.prt.dispatch:handleTransition</value>
+          <value name="conditionName">Inbound transitions</value>
+        </record>
+      </record>
+    </array>
+    <value name="processingSuspended">false</value>
+    <value name="retrievalSuspended">false</value>
+    <value name="transportAckSize">1</value>
+    <value name="deliverEnabled">true</value>
+    <value name="executeEnabled">true</value>
+    <value name="ordering">0</value>
+    <value name="joinTimeout">86400000</value>
+    <value name="serialSuspendOnError">false</value>
+    <value name="docsPrefetchMax">10</value>
+    <value name="docsPrefetchMin">4</value>
+    <value name="priorityEnabled">false</value>
+    <null name="namedObjectString"/>
+  </record>
+</Values>
