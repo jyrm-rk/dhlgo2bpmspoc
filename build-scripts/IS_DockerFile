@@ -6,6 +6,6 @@ FROM ${IMAGE_REGISTRY_URL}/${BASE_IS_IMAGE}
 LABEL "Image.maintainer"="Jay"
 LABEL "Image.Usage"="DHL-GO2-POC"
  
-COPY  --chown=1724:1724 ./IS/ ${SAG_HOME}/IntegrationServer/instances/${INSTANCE_NAME}/packages
+COPY  --chown=1724:1724 ./assets/IS/ ${SAG_HOME}/IntegrationServer/instances/${INSTANCE_NAME}/packages
 
 ###########
