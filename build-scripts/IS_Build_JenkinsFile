@@ -1,0 +1,47 @@
+pipeline {
+    agent any
+    
+        environment {
+        SAG_HOME = "/opt/softwareag"
+        INSTANCE_NAME = "default"
+        IMAGE_REGISTRY_CRED = ""
+        IMAGE_REGISTRY_URL = "registry-144fd7c1.nip.io/v2"
+        BASE_IS_IMAGE = "dhl-go2-bpmspoc-base-is-image:v1.0"
+        //IMAGE_REGISTRY_URL = "registry-144fd7c1.nip.io/v2"
+        IS_IMAGE_NAME = "dhl-go2-bpmspoc-is-image"
+        MWS_IMAGE_NAME = ""
+        IS_DOCKERFILE = "./build-scripts/IS_DockerFile"
+        MWS_DOCKERFILE = "./build-scripts/MWS_DockerFile"
+                 
+    }
+
+
+    stages {
+        stage('Checkout Code from GitHub') {
+            steps {
+                // Get some code from a GitHub repository
+                git 'https://github.com/jyrm-rk/dhlgo2bpmspoc.git'
+                
+                sh """
+                pwd
+                ls -lrta
+                
+                """
+            }
+        }
+        stage('Create IS Docker Image'){
+            steps{
+                sh """
+                docker build -t $IMAGE_REGISTRY_URL/$IS_IMAGE_NAME:$imageTag . -f $IS_DOCKERFILE --build-arg IMAGE_REGISTRY_URL=$IMAGE_REGISTRY_URL --build-arg BASE_IS_IMAGE=$BASE_IS_IMAGE
+                docker push $IMAGE_REGISTRY_URL/$IS_IMAGE_NAME:$imageTag
+                """
+            }
+        }
+        stage('Create MWS Docker Image'){
+            steps{
+                echo "Creating MWS Docker Image"
+            }
+        }
+    }   
+
+}
