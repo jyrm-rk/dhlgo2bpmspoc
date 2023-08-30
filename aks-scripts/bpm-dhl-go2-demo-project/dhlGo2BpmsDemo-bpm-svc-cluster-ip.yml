@@ -1,0 +1,21 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: dhl-go2-bpms-demo-svc
+  namespace: dhl-go2-bpms
+  labels:
+    app: dhl-go2-bpms-demo-my-project
+spec:
+  type: ClusterIP
+  ports:
+    - name: http-port
+      port: 5555
+      targetPort: 5555
+    - name: https-port
+      port: 5543
+      targetPort: 5543
+    - name: taskengine-port
+      port: 9202
+      targetPort: 9202
+  selector:
+    app: dhl-go2-bpms-demo-my-project

@@ -1,0 +1,24 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: dhl-um-demo-my-project-clusterip-svc
+  namespace: dhl-go2-bpms
+  labels:
+    app: dhl-um-demo-my-project
+    app.kubernetes.io/name: um
+    app.kubernetes.io/component: um
+    app.kubernetes.io/part-of: um
+spec:
+  type: ClusterIP
+  ports:
+    - name: nsp-port
+      port: 9000
+      targetPort: 9000
+    - name: nhp-port
+      port: 9001
+      targetPort: 9001
+    - name: nhsp-port
+      port: 9003
+      targetPort: 9003
+  selector:
+    app: dhl-um-demo-my-project

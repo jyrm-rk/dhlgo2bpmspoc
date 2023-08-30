@@ -1,0 +1,35 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: dhl-sqlserver-demo-my-project-svc
+  namespace: dhl-go2-bpms
+  labels:
+    app: dhl-sqlserver-demo-my-project
+spec:
+  type: ClusterIP
+  ports:
+    - name: http-port
+      port: 1433
+      targetPort: 1433
+  clusterIP: None
+  selector:
+    app: dhl-sqlserver-demo-my-project
+
+
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: dhl-sqlserver-demo-my-project-svc-0
+  namespace: dhl-go2-bpms
+  labels:
+    app: dhl-sqlserver-demo-my-project
+spec:
+  type: ClusterIP
+  ports:
+    - name: http-port
+      port: 1433
+      targetPort: 1433
+  selector:
+    statefulset.kubernetes.io/pod-name: dhl-sqlserver-demo-my-project-0

@@ -1,0 +1,70 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dhl-um-demo-my-project
+  namespace: dhl-go2-bpms
+  labels:
+    app: dhl-um-demo-my-project
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dhl-um-demo-my-project
+  template:
+    metadata:
+      labels:
+        app: dhl-um-demo-my-project
+    spec:
+      containers:
+      - name: dhl-um-demo-my-project
+        image: sagcr.azurecr.io/universalmessaging-server:10.15
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 9000
+          protocol: TCP
+        - containerPort: 9001
+          protocol: TCP
+        readinessProbe:
+          tcpSocket:
+            port: 9000
+          initialDelaySeconds: 30
+          timeoutSeconds: 5
+          periodSeconds: 5
+          successThreshold: 1
+          failureThreshold: 20
+        livenessProbe:
+          tcpSocket:
+            port: 9000
+          initialDelaySeconds: 60
+          timeoutSeconds: 5
+          periodSeconds: 60
+          successThreshold: 1
+          failureThreshold: 3
+        volumeMounts:
+        - name: licence
+          mountPath: /opt/softwareag/UniversalMessaging/server/umserver/licence/licence.xml
+          subPath: universalmessaging-licence.xml
+        - name: data
+          mountPath: /opt/softwareag/UniversalMessaging/server/umserver/data
+          readOnly: false
+        - name: logs
+          mountPath: /opt/softwareag/UniversalMessaging/server/umserver/logs
+          readOnly: false
+      securityContext:
+        fsGroup: 1724  
+      volumes:
+      - name: licence
+        configMap:
+          name: dhl-um-demo-my-project-configmap
+          items:
+            - key: universalmessaging-licence.xml
+              path: universalmessaging-licence.xml
+      - name: data
+        persistentVolumeClaim:
+          claimName: dhl-go2-bpms-demo-um-data-0-pvc
+      - name: logs
+        persistentVolumeClaim:
+          claimName: dhl-go2-bpms-demo-um-log-0-pvc              
+      imagePullSecrets:
+      - name: sag-dhl-go2-jay

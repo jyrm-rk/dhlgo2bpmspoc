@@ -1,4 +1,7 @@
-FROM registry-144fd7c1.nip.io/v2/wm1015bpm:v1
+ARG IMAGE_REGISTRY_URL
+ARG BASE_IS_IMAGE
+
+FROM ${IMAGE_REGISTRY_URL}/${BASE_IS_IMAGE}
 
 LABEL "Image.maintainer"="Jay"
 LABEL "Image.Usage"="DHL-GO2-POC"

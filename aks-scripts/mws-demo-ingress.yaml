@@ -1,0 +1,69 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-staging
+    field.cattle.io/publicEndpoints: '[{"addresses":["20.79.215.193"],"port":443,"protocol":"HTTPS","serviceName":"dhl-bpm-demo:dhl-mws-demo-my-project-svc","ingressName":"dhl-bpm-demo:mws-demo-ingress","hostname":"mws-demo-144fd7c1.nip.io","path":"/","allNodes":false}]'
+    nginx.ingress.kubernetes.io/affinity: cookie
+    nginx.ingress.kubernetes.io/backend-protocol: HTTP
+    nginx.ingress.kubernetes.io/session-cookie-max-age: "3600"
+    nginx.ingress.kubernetes.io/session-cookie-name: mydemomwsroute
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+  creationTimestamp: "2023-03-29T08:38:07Z"
+  generation: 6
+  managedFields:
+  - apiVersion: networking.k8s.io/v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:status:
+        f:loadBalancer:
+          f:ingress: {}
+    manager: nginx-ingress-controller
+    operation: Update
+    subresource: status
+    time: "2023-03-29T08:38:52Z"
+  - apiVersion: networking.k8s.io/v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:annotations:
+          .: {}
+          f:cert-manager.io/cluster-issuer: {}
+          f:field.cattle.io/publicEndpoints: {}
+          f:nginx.ingress.kubernetes.io/affinity: {}
+          f:nginx.ingress.kubernetes.io/backend-protocol: {}
+          f:nginx.ingress.kubernetes.io/session-cookie-max-age: {}
+          f:nginx.ingress.kubernetes.io/session-cookie-name: {}
+          f:nginx.ingress.kubernetes.io/ssl-redirect: {}
+      f:spec:
+        f:ingressClassName: {}
+        f:rules: {}
+        f:tls: {}
+    manager: rancher
+    operation: Update
+    time: "2023-07-28T05:02:21Z"
+  name: mws-demo-ingress
+  namespace: dhl-bpm-demo
+  resourceVersion: "542113323"
+  uid: 2b1c4c0e-b103-49ba-b22d-f1ad6c4d6647
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: mws-demo-144fd7c1.nip.io
+    http:
+      paths:
+      - backend:
+          service:
+            name: dhl-mws-demo-my-project-svc-105
+            port:
+              number: 8585
+        path: /
+        pathType: ImplementationSpecific
+  tls:
+  - hosts:
+    - mws-demo-144fd7c1.nip.io
+    secretName: tls-mws-demo-staging
+status:
+  loadBalancer:
+    ingress:
+    - ip: 20.79.215.193

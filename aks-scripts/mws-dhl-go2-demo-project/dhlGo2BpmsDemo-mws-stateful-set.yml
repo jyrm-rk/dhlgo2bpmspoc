@@ -1,0 +1,140 @@
+---
+    apiVersion: apps/v1
+    kind: StatefulSet
+    metadata:
+      labels:
+        app: dhl-go2-mws-demo-my-project
+      name: dhl-go2-mws-demo-my-project
+      namespace: dhl-go2-bpms
+    spec:
+      replicas: 1
+      selector:
+        matchLabels:
+          app: dhl-go2-mws-demo-my-project
+      serviceName: "dhl-go2-mws-demo-my-project-svc"
+      template:
+        metadata:
+          labels:
+            app: dhl-go2-mws-demo-my-project
+        spec:
+          containers:
+          - image: registry-144fd7c1.nip.io/v2/wm1015mws-myproject:v5
+            imagePullPolicy: Always
+            name: dhl-go2-mws-demo-my-project 
+            ports:
+            - containerPort: 8585
+              protocol: TCP 
+            env:
+            - name: DB_URL
+              value: "jdbc:wm:sqlserver://dhl-sqlserver-demo-my-project-svc-0:1433;databaseName=webm1015"
+            - name: DB_USERNAME
+              value: "webm1015"
+            - name: DB_PASSWORD
+              value: "manage"  
+            - name: DB_TYPE
+              value: "ms"    
+            - name: NODE_NAME
+              valueFrom:
+               fieldRef:
+                  fieldPath: metadata.name
+            volumeMounts:
+            - name: mws-dhl-go2-bpms-demo-vol-data
+              mountPath: /sag/mws1015/MWS/volumes/data   
+              readOnly: false  
+            - name: mws-dhl-go2-bpms-demo-vol-logs
+              mountPath: /sag/mws1015/MWS/volumes/logs   
+              readOnly: false  
+            - name: administrator-creds
+              mountPath: /sag/mws1015/MWS/volumes/configs/assets_cfg/administrator.xml
+              subPath: administrator.xml
+            - name: sysadmin-creds
+              mountPath: /sag/mws1015/MWS/volumes/configs/assets_cfg/sysadmin.xml
+              subPath: sysadmin.xml  
+            - name: te-settings
+              mountPath: /sag/mws1015/MWS/volumes/configs/assets_cfg/te-settings.xml
+              subPath: te-settings.xml 
+            - name: server-settings
+              mountPath: /sag/mws1015/MWS/volumes/configs/assets_cfg/server-settings.xml
+              subPath: server-settings.xml
+            - name: global-cfg
+              mountPath: /sag/mws1015/MWS/volumes/configs/assets_cfg/global-cfg.xml
+              subPath: global-cfg.xml 
+            - name: custom-wrapper-conf
+              mountPath: /sag/mws1015/MWS/volumes/configs/profile_cfg/custom_wrapper.conf
+              subPath: custom_wrapper.conf                
+            readinessProbe:
+              tcpSocket:
+                port: 8585
+              initialDelaySeconds: 60
+              timeoutSeconds: 5
+              periodSeconds: 5
+              successThreshold: 1
+              failureThreshold: 200000
+            livenessProbe:
+              tcpSocket:
+                port: 8585
+              initialDelaySeconds: 60
+              timeoutSeconds: 5
+              periodSeconds: 60
+              successThreshold: 1
+              failureThreshold: 200000
+          imagePullSecrets:
+          - name: sag-dhl-go2-registry-secret
+          terminationGracePeriodSeconds: 30   
+          volumes:
+          - name: administrator-creds
+            configMap:
+              name: dhl-go2-mws-demo-my-project-configmap
+              items:
+                - key: administrator.xml
+                  path: administrator.xml 
+          - name: sysadmin-creds
+            configMap:
+              name: dhl-go2-mws-demo-my-project-configmap
+              items:
+                - key: sysadmin.xml
+                  path: sysadmin.xml         
+          - name: te-settings
+            configMap:
+              name: dhl-go2-mws-demo-my-project-configmap
+              items:
+                - key: te-settings.xml
+                  path: te-settings.xml             
+          - name: server-settings
+            configMap:
+              name: dhl-go2-mws-demo-my-project-configmap
+              items:
+                - key: server-settings.xml
+                  path: server-settings.xml
+          - name: global-cfg
+            configMap:
+              name: dhl-go2-mws-demo-my-project-configmap
+              items:
+                - key: global-cfg.xml
+                  path: global-cfg.xml   
+          - name: custom-wrapper-conf
+            configMap:
+              name: dhl-go2-mws-my-demo-project-custom-wrapper-conf-configmap
+              items:
+                - key: custom_wrapper.conf
+                  path: custom_wrapper.conf      
+      volumeClaimTemplates:                          
+      - metadata:
+          name: mws-dhl-go2-bpms-demo-vol-data
+        spec:
+          accessModes: [ "ReadWriteOnce" ]
+          storageClassName: "azurefile"
+          resources:
+            requests:
+              storage: 1Gi
+      - metadata:
+          name: mws-dhl-go2-bpms-demo-vol-logs
+        spec:
+          accessModes: [ "ReadWriteOnce" ]
+          storageClassName: "azurefile"
+          resources:
+            requests:
+              storage: 3Gi                                                                   
+      updateStrategy:
+        type: RollingUpdate
+               

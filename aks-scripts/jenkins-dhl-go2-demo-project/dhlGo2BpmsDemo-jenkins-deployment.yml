@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: dhl-go2-jenkins
+  name: dhl-go2-jenkins
+  namespace: dhl-go2-bpms
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dhl-go2-jenkins
+  template:
+    metadata:
+      labels:
+        app: dhl-go2-jenkins
+    spec:
+      securityContext:
+        fsGroup: 1000    
+        runAsUser: 1000       
+      containers:
+      - name: dhl-go2-jenkins-pod
+        image: jenkins/jenkins:lts
+        ports:
+          - name: http-port
+            containerPort: 8080
+          - name: jnlp-port
+            containerPort: 50000
+        volumeMounts:
+          - name: dhl-go2-jenkins-vol
+            mountPath: /var/jenkins_vol
+            readOnly: false
+          - name: dhl-go2-jenkins-home
+            mountPath: /var/jenkins_home
+            readOnly: false
+      volumes:
+        - name: dhl-go2-jenkins-vol
+          persistentVolumeClaim:
+            claimName: dhl-go2-jenkins-vol-pvc
+        - name: dhl-go2-jenkins-home
+          persistentVolumeClaim:
+            claimName: dhl-go2-jenkins-home-pvc
