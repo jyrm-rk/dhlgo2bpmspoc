@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: dhl-go2-jenkins
+  namespace: dhl-go2-bpms
+  labels:
+    app: dhl-go2-jenkins
+spec:
+  type: NodePort
+  ports:
+    - port: 8080
+      targetPort: 8080
+      nodePort: 30000
+  selector:
+    app: dhl-go2-jenkins
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: dhl-go2-jenkins-jnlp
+  namespace: dhl-go2-bpms
+  labels:
+    app: dhl-go2-jenkins
+spec:
+  type: ClusterIP
+  ports:
+    - port: 50000
+      targetPort: 50000
+  selector:
+    app: dhl-go2-jenkins

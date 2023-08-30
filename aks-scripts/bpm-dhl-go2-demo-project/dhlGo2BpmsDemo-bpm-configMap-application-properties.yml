@@ -1,0 +1,57 @@
+---
+    apiVersion: v1
+    kind: ConfigMap
+    metadata:
+      name: dhl-go2-bpms-demo-my-project-application-properties
+      namespace: dhl-go2-bpms
+      labels:
+        app: dhl-go2-bpms-demo-my-project
+    data:
+      application.properties: |
+              jdbc.wm_db.dbURL=jdbc\:wm\:sqlserver\://dhl-sqlserver-demo-my-project-svc-0\:1433;databaseName\=webm1015 
+              jdbc.wm_db.password={AES}Y5IgMqjfvkgbg7p5VUZztw==
+              jdbc.wm_db.userid=webm1015
+              jdbcfunc.ISInternal.connPoolAlias=wm_db
+              jdbcfunc.ISCoreAudit.connPoolAlias=wm_db
+              jdbcfunc.CentralUsers.connPoolAlias=wm_db    
+              jdbcfunc.ProcessAudit.connPoolAlias=wm_db
+              jdbcfunc.ProcessEngine.connPoolAlias=wm_db
+              user.Administrator.password={AES}Y5IgMqjfvkgbg7p5VUZztw==
+              messaging.IS_UM_CONNECTION.CLIENTPREFIX=p_J_jRQtEolDEurgAVIwwwADXaZQs_
+              messaging.IS_UM_CONNECTION.default=true
+              messaging.IS_UM_CONNECTION.type=UM
+              messaging.IS_UM_CONNECTION.url=nsp\://dhl-um-demo-my-project-clusterip-svc\:9000
+              jms.DEFAULT_IS_JMS_CONNECTION.clientID=DEFAULT_IS_JMS_CLIENT
+              jms.PE_NONTRANSACTIONAL_ALIAS.clientID=p_ISb346b24e_edde_4299_a52f_245090fddff7
+              jndi.DEFAULT_IS_JNDI_PROVIDER.providerURL=nsp\://dhl-um-demo-my-project-clusterip-svc\:9000
+              settings.watt.server.threadPool=250
+              settings.watt.server.threadPoolMin=50    
+              settings.watt.server.auth.samlResolver=http://dhl-go2-mws-demo-my-project-svc:8585/services/SAML
+              peproperty.watt.prt.uploadMetadata=true
+              peproperty.watt.prt.sleepInterval=1
+              peproperty.watt.prt.maxdbretries=360
+              peproperty.watt.prt.checkDuplicates=false
+              peproperty.watt.prt.broadcastInterval=120
+              peproperty.watt.prt.processExpire=60
+              peproperty.watt.prt.maxBroadcastEvents=1000
+              peproperty.watt.prt.failedProcessExpire=3600
+              peproperty.watt.prt.externalcluster=false
+              peproperty.watt.prt.cleanInterval=600
+              monproperty.wm.monitor.myWebmethodsHost=dhl-go2-mws-demo-my-project-svc
+              monproperty.wm.monitor.myWebmethodsPort=8585
+              monproperty.wm.monitor.myWebmethodsTransport=http
+              monproperty.wm.monitor.myWebmethodsUserName=Administrator
+              monproperty.wm.monitor.myWebmethodsPassword={AES}Y5IgMqjfvkgbg7p5VUZztw==
+              monproperty.wm.monitor.dbRetries=3
+              monproperty.wm.monitor.connTimeout=10000
+              monproperty.wm.monitor.dlsEnabled=false
+              monproperty.wm.monitor.dlsSuperUser=Administrator
+              monproperty.wm.monitor.resubmitOnLocalIS=true
+              monproperty.wm.monitor.addMwUsertoMonitorACL=true
+              remoteserver.local.host=localhost
+              remoteserver.local.port=5555
+              remoteserver.local.user=Administrator
+              remoteserver.local.password={AES}Y5IgMqjfvkgbg7p5VUZztw==
+              group.Administrators.users=Administrator,Default
+              group.Replicators.users=Administrator,Default,Replicator
+

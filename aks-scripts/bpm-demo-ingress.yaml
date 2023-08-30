@@ -1,0 +1,63 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-staging
+    field.cattle.io/publicEndpoints: '[{"addresses":["20.79.215.193"],"port":443,"protocol":"HTTPS","serviceName":"dhl-bpm-demo:dhl-bpm-demo-svc","ingressName":"dhl-bpm-demo:bpm-demo-ingress","hostname":"bpm-demo-144fd7c1.nip.io","path":"/","allNodes":false}]'
+    nginx.ingress.kubernetes.io/backend-protocol: HTTPS
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+  creationTimestamp: "2023-03-20T08:23:16Z"
+  generation: 4
+  managedFields:
+  - apiVersion: networking.k8s.io/v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:status:
+        f:loadBalancer:
+          f:ingress: {}
+    manager: nginx-ingress-controller
+    operation: Update
+    subresource: status
+    time: "2023-03-20T08:28:52Z"
+  - apiVersion: networking.k8s.io/v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:annotations:
+          .: {}
+          f:cert-manager.io/cluster-issuer: {}
+          f:field.cattle.io/publicEndpoints: {}
+          f:nginx.ingress.kubernetes.io/backend-protocol: {}
+          f:nginx.ingress.kubernetes.io/ssl-redirect: {}
+      f:spec:
+        f:ingressClassName: {}
+        f:rules: {}
+        f:tls: {}
+    manager: rancher
+    operation: Update
+    time: "2023-03-20T08:28:52Z"
+  name: bpm-demo-ingress
+  namespace: dhl-bpm-demo
+  resourceVersion: "450209037"
+  uid: 44c7e8d1-3821-4e08-954a-f00d2a697b74
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: bpm-demo-144fd7c1.nip.io
+    http:
+      paths:
+      - backend:
+          service:
+            name: dhl-bpm-demo-svc
+            port:
+              number: 5543
+        path: /
+        pathType: ImplementationSpecific
+  tls:
+  - hosts:
+    - bpm-demo-144fd7c1.nip.io
+    secretName: tls-bpm-demo-staging
+status:
+  loadBalancer:
+    ingress:
+    - ip: 20.79.215.193

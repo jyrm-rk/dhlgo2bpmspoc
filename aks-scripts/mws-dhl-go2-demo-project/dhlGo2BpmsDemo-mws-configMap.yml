@@ -1,0 +1,60 @@
+---
+    apiVersion: v1
+    kind: ConfigMap
+    metadata:
+      name: dhl-go2-mws-demo-my-project-configmap
+      namespace: dhl-go2-bpms
+      labels:
+        app: dhl-go2-mws-demo-my-project
+    data:
+      administrator.xml: |
+        <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+        <CONFIG>
+          <CONTEXT alias="system.directory.user.storage">
+            <wm_xt_sysdiruser name="administrator" password="manage" disabled="false" passwordValidUntil="-1" />
+          </CONTEXT>
+        </CONFIG>
+      sysadmin.xml: |
+        <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+        <CONFIG>
+          <CONTEXT alias="system.directory.user.storage">
+            <wm_xt_sysdiruser name="SysAdmin" password="manage" disabled="false" passwordValidUntil="-1" />
+          </CONTEXT>
+        </CONFIG>  
+      server-settings.xml: |
+        <?xml version="1.0" encoding="UTF-8"?>
+        <CONFIG>
+            <CONTEXT alias="folder.portlets/My webMethods - Application Configuration">
+                <wm_bam_ws_config name="Web Service Configuration" serverList="true|BPM only|dhl-go2-bpms-demo-svc|5555|false|||false|" />
+            </CONTEXT>
+        </CONFIG>
+      global-cfg.xml: |
+        <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+        <CONFIG>
+          <runtime_config appName="__global__">
+            <enventries>
+              <entry ftype="java.lang.String" fvalue="custom_val" key="custom_key" />
+              <entry ftype="java.lang.String" fvalue="Administrator" key="wsclient.global.basicauth-username" />
+              <entry ftype="java.lang.String" fvalue="manage" key="wsclient.global.basicauth-password" />
+            </enventries>
+          </runtime_config>
+        </CONFIG>
+      te-settings.xml: |
+        <CONFIG>
+            <CONTEXT alias="webm.apps.config.ws.taskengine">
+                        <page>
+                                    <layout name="editable" value="false" />
+                                    <row>
+                                                <column>
+                                                            <wm_task_search___taskengineconfig name="Task Engine Settings"
+                                                                        processEngineHost="dhl-go2-bpms-demo-svc" processEnginePassword="{AES}Y5IgMqjfvkgbg7p5VUZztw==" processEnginePort="5555"
+                                                                        processEngineUsername="Administrator" processEngineUseSSL="false" rulesEngineHost="dhl-go2-bpms-demo-svc"
+                                                                        rulesEnginePassword="{AES}Y5IgMqjfvkgbg7p5VUZztw==" rulesEnginePort="5555" rulesEngineUsername="Administrator"
+                                                                        rulesEngineUseSSL="false" useProcessEngineConfig="true" />
+                                                </column>
+                                    </row>
+                                    <hobos />
+                        </page>
+            </CONTEXT>
+        </CONFIG>
+        
