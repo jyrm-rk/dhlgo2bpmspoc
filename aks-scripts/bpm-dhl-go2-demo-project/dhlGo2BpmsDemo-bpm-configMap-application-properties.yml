@@ -16,12 +16,22 @@
               jdbcfunc.CentralUsers.connPoolAlias=wm_db    
               jdbcfunc.ProcessAudit.connPoolAlias=wm_db
               jdbcfunc.ProcessEngine.connPoolAlias=wm_db
+              jdbcfunc.ISDashboardStats.connPoolAlias=wm_db
               user.Administrator.password={AES}Y5IgMqjfvkgbg7p5VUZztw==
               messaging.IS_UM_CONNECTION.CLIENTPREFIX=p_J_jRQtEolDEurgAVIwwwADXaZQs_
               messaging.IS_UM_CONNECTION.default=true
               messaging.IS_UM_CONNECTION.type=UM
               messaging.IS_UM_CONNECTION.url=nsp\://dhl-um-demo-my-project-clusterip-svc\:9000
+              messaging.IS_UM_CONNECTION.enabled=true
+              jms.DEFAULT_IS_JMS_CONNECTION.aliasName=DEFAULT_IS_JMS_CONNECTION
+              jms.DEFAULT_IS_JMS_CONNECTION.description=DEFAULT_IS_JMS_CONNECTION
+              jms.DEFAULT_IS_JMS_CONNECTION.jndi_jndiAliasName=DEFAULT_IS_JNDI_PROVIDER
+              jms.DEFAULT_IS_JMS_CONNECTION.jndi_connectionFactoryLookupName=local_um
               jms.DEFAULT_IS_JMS_CONNECTION.clientID=DEFAULT_IS_JMS_CLIENT
+              jms.PE_NONTRANSACTIONAL_ALIASN.aliasName=PE_NONTRANSACTIONAL_ALIAS
+              jms.PE_NONTRANSACTIONAL_ALIAS.description=PE_NONTRANSACTIONAL_ALIAS
+              jms.PE_NONTRANSACTIONAL_ALIAS.jndi_jndiAliasName=DEFAULT_IS_JNDI_PROVIDER
+              jms.PE_NONTRANSACTIONAL_ALIAS.jndi_connectionFactoryLookupName=local_um
               jms.PE_NONTRANSACTIONAL_ALIAS.clientID=p_ISb346b24e_edde_4299_a52f_245090fddff7
               jndi.DEFAULT_IS_JNDI_PROVIDER.providerURL=nsp\://dhl-um-demo-my-project-clusterip-svc\:9000
               settings.watt.server.threadPool=250

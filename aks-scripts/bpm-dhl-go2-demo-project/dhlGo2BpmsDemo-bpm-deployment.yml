@@ -19,7 +19,7 @@
           securityContext:
             runAsUser: 0
           containers:
-          - image: registry-144fd7c1.nip.io/v2/wm1015bpm:v1
+          - image: registry-144fd7c1.nip.io/v2/dhl-go2-bpmspoc-is-image:v1.0
             imagePullPolicy: Always
             livenessProbe:
               failureThreshold: 60
@@ -52,6 +52,10 @@
               mountPath: /opt/softwareag/IntegrationServer/instances/default/config/licenseKey.xml
               subPath: licenseKey.xml
               defaultMode: 0777
+            - name: jms-cnf
+              mountPath: /opt/softwareag/IntegrationServer/instances/default/config/jms.cnf
+              subPath: jms.cnf
+              defaultMode: 0777
             readinessProbe:
               failureThreshold: 60
               httpGet:
@@ -65,24 +69,6 @@
           imagePullSecrets:
           - name: sag-dhl-go2-registry-secret    
           volumes:
-          - name: prtcnf
-            configMap:
-              name: dhl-go2-bpms-demo-my-project-configmap-prt-settings
-              items:
-              - key: prt.cnf
-                path: prt.cnf   
-          - name: custom-wrapper-conf
-            configMap:
-              name: dhl-go2-bpms-demo-my-project-custom-wrapper-conf
-              items:
-              - key: custom_wrapper.conf
-                path: custom_wrapper.conf
-          - name: jdbc-pool-conf
-            configMap:
-              name: dhl-go2-bpms-demo-my-project-jdbc-pool-xml
-              items:
-              - key: wm_db.xml
-                path: wm_db.xml
           - name: application-properties
             configMap:
               name: dhl-go2-bpms-demo-my-project-application-properties
@@ -96,6 +82,13 @@
               items:
               - key: licenseKey.xml
                 path: licenseKey.xml
+          - name: jms-cnf
+            configMap:
+              name: dhl-go2-bpms-demo-my-project-jms-cnf
+              defaultMode: 0777
+              items:
+              - key: jms.cnf
+                path: jms.cnf
           - name: taskclient-properties
             configMap:
               name: dhl-go2-bpms-demo-my-project-taskclient-properties
