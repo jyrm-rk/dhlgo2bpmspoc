@@ -1,0 +1,31 @@
+pipeline {
+    agent any
+    
+        environment {
+                 
+    }
+
+
+    stages {
+        stage('Checkout Code from GitHub') {
+            steps {
+                // Get some code from a GitHub repository
+                git 'https://github.com/jyrm-rk/dhlgo2bpmspoc.git'
+                
+                sh """
+                pwd
+                ls -lrta
+                
+                """
+            }
+        }
+        stage('Applying all configurations to Kuberentes and performing deployment..'){
+            steps{
+                sh """
+                kubectl apply -f ./aks-scripts/bpm-dhl-go2-demo-project
+                """
+            }
+        }
+    }   
+
+}
