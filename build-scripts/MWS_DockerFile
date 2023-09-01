@@ -1,0 +1,11 @@
+ARG IMAGE_REGISTRY_URL
+ARG BASE_MWS_IMAGE
+
+FROM ${IMAGE_REGISTRY_URL}/${BASE_MWS_IMAGE}
+
+LABEL "Image.maintainer"="Jay"
+LABEL "Image.Usage"="DHL-GO2-POC"
+ 
+COPY  --chown=1724:1724 ./assets/MWS/ /sag/mws1015/MWS/server/default/deploy
+
+###########
