@@ -51,11 +51,9 @@
             - name: license-file
               mountPath: /opt/softwareag/IntegrationServer/instances/default/config/licenseKey.xml
               subPath: licenseKey.xml
-              defaultMode: 0777
             - name: jms-cnf
               mountPath: /opt/softwareag/IntegrationServer/instances/default/config/jms.cnf
               subPath: jms.cnf
-              defaultMode: 0777
             readinessProbe:
               failureThreshold: 60
               httpGet:
