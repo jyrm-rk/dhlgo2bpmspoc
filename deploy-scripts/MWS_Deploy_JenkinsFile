@@ -2,16 +2,8 @@ pipeline {
     agent any
     
         environment {
-        SAG_HOME = "/sag/mws1015"
-        INSTANCE_NAME = "default"
-        IMAGE_REGISTRY_CRED = ""
-        IMAGE_REGISTRY_URL = "registry-144fd7c1.nip.io/v2"
-        //BASE_IS_IMAGE = "dhl-go2-bpmspoc-base-is-image:v1.0"
-        //IS_IMAGE_NAME = "dhl-go2-bpmspoc-is-image"
-        BASE_MWS_IMAGE = "wm1015mws-myproject:v5"
-        MWS_IMAGE_NAME = "dhl-go2-bpmspoc-mws-image"
-        IS_DOCKERFILE = "./build-scripts/IS_DockerFile"
-        MWS_DOCKERFILE = "./build-scripts/MWS_DockerFile"
+            IMAGE_REGISTRY_URL = ""
+            MWS_IMAGE_NAME = ""
                  
     }
 
@@ -29,19 +21,10 @@ pipeline {
                 """
             }
         }
-        stage('Create MWS Docker Image'){
+        stage('Applying all configurations to Kuberentes and performing deployment..'){
             steps{
-                echo "Creating MWS Docker Image"
                 sh """
-                docker build -t $IMAGE_REGISTRY_URL/$MWS_IMAGE_NAME:$imageTag . -f $MWS_DOCKERFILE --build-arg IMAGE_REGISTRY_URL=$IMAGE_REGISTRY_URL --build-arg BASE_MWS_IMAGE=$BASE_MWS_IMAGE
-                """
-            }
-        }
-        stage('Pushing MWS Docker Image to Registry'){
-            steps{
-                echo "Pushing MWS Docker Image to Registry"
-                sh """
-                docker push $IMAGE_REGISTRY_URL/$MWS_IMAGE_NAME:$imageTag
+                kubectl apply -f ./aks-scripts/mws-dhl-go2-demo-project
                 """
             }
         }
