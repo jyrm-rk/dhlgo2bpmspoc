@@ -24,7 +24,7 @@ pipeline {
         stage('Applying all configurations to Kuberentes and performing deployment..'){
             steps{
                 sh """
-                kubectl apply -f ./aks-scripts/mws-dhl-go2-demo-project
+                kubectl create -f ./aks-scripts/mws-dhl-go2-demo-project
                 """
             }
         }
