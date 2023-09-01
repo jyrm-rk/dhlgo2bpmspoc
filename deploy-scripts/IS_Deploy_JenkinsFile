@@ -2,7 +2,8 @@ pipeline {
     agent any
     
         environment {
-                 
+            IMAGE_REGISTRY_URL = ""
+            IS_IMAGE_NAME = ""                 
     }
 
 
