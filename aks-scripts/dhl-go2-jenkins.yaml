@@ -3,25 +3,14 @@ kind: Ingress
 metadata:
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-staging
-    field.cattle.io/publicEndpoints: '[{"addresses":["20.79.215.193"],"port":443,"protocol":"HTTPS","serviceName":"dhl-bpm-demo:dhl-mws-demo-my-project-svc","ingressName":"dhl-bpm-demo:mws-demo-ingress","hostname":"mws-demo-144fd7c1.nip.io","path":"/","allNodes":false}]'
     nginx.ingress.kubernetes.io/affinity: cookie
     nginx.ingress.kubernetes.io/backend-protocol: HTTP
     nginx.ingress.kubernetes.io/session-cookie-max-age: "3600"
     nginx.ingress.kubernetes.io/session-cookie-name: mydemomwsroute
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
-  creationTimestamp: "2023-03-29T08:38:07Z"
-  generation: 6
+  creationTimestamp: "2023-08-17T10:44:46Z"
+  generation: 1
   managedFields:
-  - apiVersion: networking.k8s.io/v1
-    fieldsType: FieldsV1
-    fieldsV1:
-      f:status:
-        f:loadBalancer:
-          f:ingress: {}
-    manager: nginx-ingress-controller
-    operation: Update
-    subresource: status
-    time: "2023-03-29T08:38:52Z"
   - apiVersion: networking.k8s.io/v1
     fieldsType: FieldsV1
     fieldsV1:
@@ -29,7 +18,6 @@ metadata:
         f:annotations:
           .: {}
           f:cert-manager.io/cluster-issuer: {}
-          f:field.cattle.io/publicEndpoints: {}
           f:nginx.ingress.kubernetes.io/affinity: {}
           f:nginx.ingress.kubernetes.io/backend-protocol: {}
           f:nginx.ingress.kubernetes.io/session-cookie-max-age: {}
@@ -41,27 +29,37 @@ metadata:
         f:tls: {}
     manager: rancher
     operation: Update
-    time: "2023-07-28T05:02:21Z"
-  name: mws-demo-ingress
-  namespace: dhl-bpm-demo
-  resourceVersion: "542113323"
-  uid: 2b1c4c0e-b103-49ba-b22d-f1ad6c4d6647
+    time: "2023-08-17T10:44:46Z"
+  - apiVersion: networking.k8s.io/v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:status:
+        f:loadBalancer:
+          f:ingress: {}
+    manager: nginx-ingress-controller
+    operation: Update
+    subresource: status
+    time: "2023-08-17T10:45:07Z"
+  name: dhl-go2-jenkins
+  namespace: dhl-go2-bpms
+  resourceVersion: "558437974"
+  uid: 7dd49640-95e8-48af-a260-cbf90ad52735
 spec:
   ingressClassName: nginx
   rules:
-  - host: mws-demo-144fd7c1.nip.io
+  - host: dhl-go2-jenkins-144fd7c1.nip.io
     http:
       paths:
       - backend:
           service:
-            name: dhl-mws-demo-my-project-svc-105
+            name: dhl-go2-jenkins
             port:
-              number: 8585
+              number: 8080
         path: /
         pathType: ImplementationSpecific
   tls:
   - hosts:
-    - mws-demo-144fd7c1.nip.io
+    - dhl-go2-mws-demo-144fd7c1.nip.io
     secretName: tls-mws-demo-staging
 status:
   loadBalancer:

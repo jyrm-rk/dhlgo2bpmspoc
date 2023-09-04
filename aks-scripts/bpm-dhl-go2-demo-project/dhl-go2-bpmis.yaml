@@ -1,0 +1,68 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-staging
+    nginx.ingress.kubernetes.io/backend-protocol: HTTP
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+  creationTimestamp: "2023-08-14T08:56:29Z"
+  generation: 8
+  managedFields:
+  - apiVersion: networking.k8s.io/v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:status:
+        f:loadBalancer:
+          f:ingress: {}
+    manager: nginx-ingress-controller
+    operation: Update
+    subresource: status
+    time: "2023-08-14T08:57:07Z"
+  - apiVersion: networking.k8s.io/v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:annotations:
+          .: {}
+          f:cert-manager.io/cluster-issuer: {}
+          f:nginx.ingress.kubernetes.io/backend-protocol: {}
+          f:nginx.ingress.kubernetes.io/ssl-redirect: {}
+      f:spec:
+        f:ingressClassName: {}
+        f:rules: {}
+        f:tls: {}
+    manager: rancher
+    operation: Update
+    time: "2023-08-22T16:06:22Z"
+  name: dhl-go2-bpmis
+  namespace: dhl-go2-bpms
+  resourceVersion: "563071826"
+  uid: d2c7b14f-cfaf-4d1e-9dda-da1f37c47439
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: dhl-go2-bpmis-demo-144fd7c1.nip.io
+    http:
+      paths:
+      - backend:
+          service:
+            name: dhl-go2-bpms-demo-svc
+            port:
+              number: 5555
+        path: /
+        pathType: ImplementationSpecific
+      - backend:
+          service:
+            name: dhl-go2-bpms-demo-svc
+            port:
+              number: 9202
+        path: /task-engine/
+        pathType: ImplementationSpecific
+  tls:
+  - hosts:
+    - bpm-demo-144fd7c1.nip.io
+    secretName: tls-bpm-demo-staging
+status:
+  loadBalancer:
+    ingress:
+    - ip: 20.79.215.193

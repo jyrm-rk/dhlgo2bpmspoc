@@ -1,0 +1,62 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-staging
+    nginx.ingress.kubernetes.io/affinity: cookie
+    nginx.ingress.kubernetes.io/backend-protocol: HTTPS
+    nginx.ingress.kubernetes.io/session-cookie-max-age: "3600"
+    nginx.ingress.kubernetes.io/session-cookie-name: mydemomwsroute
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+  creationTimestamp: "2023-08-24T17:19:51Z"
+  generation: 3
+  managedFields:
+  - apiVersion: networking.k8s.io/v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:status:
+        f:loadBalancer:
+          f:ingress: {}
+    manager: nginx-ingress-controller
+    operation: Update
+    subresource: status
+    time: "2023-08-24T17:20:07Z"
+  - apiVersion: networking.k8s.io/v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:annotations:
+          .: {}
+          f:cert-manager.io/cluster-issuer: {}
+          f:nginx.ingress.kubernetes.io/affinity: {}
+          f:nginx.ingress.kubernetes.io/backend-protocol: {}
+          f:nginx.ingress.kubernetes.io/session-cookie-max-age: {}
+          f:nginx.ingress.kubernetes.io/session-cookie-name: {}
+          f:nginx.ingress.kubernetes.io/ssl-redirect: {}
+      f:spec:
+        f:ingressClassName: {}
+        f:rules: {}
+    manager: rancher
+    operation: Update
+    time: "2023-08-24T17:25:45Z"
+  name: dhl-go2-um
+  namespace: dhl-go2-bpms
+  resourceVersion: "564884136"
+  uid: 27a4a13a-e644-4c6d-a714-f38d178ec7db
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: dhl-go2-um-144fd7c1.nip.io
+    http:
+      paths:
+      - backend:
+          service:
+            name: dhl-um-demo-my-project-clusterip-svc
+            port:
+              number: 9003
+        path: /
+        pathType: ImplementationSpecific
+status:
+  loadBalancer:
+    ingress:
+    - ip: 20.79.215.193
