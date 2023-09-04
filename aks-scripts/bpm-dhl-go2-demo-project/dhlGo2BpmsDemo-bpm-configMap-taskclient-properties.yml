@@ -11,7 +11,7 @@
                 #wmtaskclient
                 #Tue Aug 22 07:02:27 UTC 2023
                 taskclienturl=http\://dhl-go2-mws-demo-my-project-svc\:8585
-                taskserver=REMOTE_MWS
+                taskserver=INPROC
                 taskclienttimeout=60000
                 taskclientusejms=false
                 taskclientuser=Administrator

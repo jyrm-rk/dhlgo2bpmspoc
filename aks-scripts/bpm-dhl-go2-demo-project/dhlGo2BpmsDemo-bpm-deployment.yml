@@ -54,6 +54,9 @@
             - name: jms-cnf
               mountPath: /opt/softwareag/IntegrationServer/instances/default/config/jms.cnf
               subPath: jms.cnf
+            - name: custom-wrapper-conf
+              mountPath: /opt/softwareag/profiles/IS_default/configuration/custom_wrapper.conf
+              subPath: custom_wrapper.conf
             readinessProbe:
               failureThreshold: 60
               httpGet:
@@ -93,3 +96,9 @@
               items:
               - key: taskclient.properties
                 path: taskclient.properties
+          - name: custom-wrapper-conf
+            configMap:
+              name: dhl-go2-bpms-demo-my-project-custom-wrapper-conf
+              items:
+              - key: custom_wrapper.conf
+                path: custom_wrapper.conf
