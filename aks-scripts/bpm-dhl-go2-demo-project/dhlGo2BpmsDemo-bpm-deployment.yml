@@ -57,6 +57,9 @@
             - name: custom-wrapper-conf
               mountPath: /opt/softwareag/profiles/IS_default/configuration/custom_wrapper.conf
               subPath: custom_wrapper.conf
+            - name: taskengine-properties
+              mountPath: /opt/softwareag/profiles/IS_default/configuration/com.softwareag.platform.config.propsloader/com.softwareag.catalina.connector.https.pid-TaskEngine.properties
+              subPath: com.softwareag.catalina.connector.https.pid-TaskEngine.properties
             readinessProbe:
               failureThreshold: 60
               httpGet:
@@ -102,3 +105,9 @@
               items:
               - key: custom_wrapper.conf
                 path: custom_wrapper.conf
+          - name: taskengine-properties
+            configMap:
+              name: dhl-go2-bpms-demo-my-project-taskengine-properties
+              items:
+              - key: com.softwareag.catalina.connector.https.pid-TaskEngine.properties
+                path: com.softwareag.catalina.connector.https.pid-TaskEngine.properties

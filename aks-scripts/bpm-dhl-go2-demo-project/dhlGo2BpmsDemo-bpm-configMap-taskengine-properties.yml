@@ -1,0 +1,33 @@
+---
+    apiVersion: v1
+    kind: ConfigMap
+    metadata:
+      name: dhl-go2-bpms-demo-my-project-taskengine-properties
+      namespace: dhl-go2-bpms
+      labels:
+        app: dhl-go2-bpms-demo-my-project
+    data:
+      com.softwareag.catalina.connector.https.pid-TaskEngine.properties: |
+                      ##
+                      #Mon Sep 04 09:36:42 UTC 2023
+                      server=SoftwareAG-Runtime
+                      scheme=https
+                      enableLookups=false
+                      description=Default HTTPS Connector
+                      acceptCount=100
+                      secure=false
+                      enabled=true
+                      minSpareThreads=25
+                      maxSpareThreads=75
+                      SSLEnabled=false
+                      maxHttpHeaderSize=8192
+                      port=9202
+                      keystoreType=JKS
+                      disableUploadTimeout=true
+                      @secure.keystorePass=@secure\:com.softwareag.catalina.connector.https.pid-TaskEngine.properties-keystorePass
+                      alias=defaultHttps
+                      sslProtocol=TLS
+                      keystoreFile=/opt/softwareag/profiles/IS_default/configuration/tomcat/conf/localhost_dont_use_in_production.jks
+                      maxThreads=150
+                      clientAuth=false
+                      algorithm=SunX509
